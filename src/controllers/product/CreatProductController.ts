@@ -1,9 +1,9 @@
 import {  Request,  Response } from "express";
 import { CreatProductServices } from "../../services/product/CreatProductServices";
 import { UploadedFile } from "express-fileupload";
-import { v2, UploadApiResponse } from "cloudinary";
+import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
 
-v2.config({
+cloudinary.config({
     cloud_name:process.env.CLOUDINARY_NAME,
     api_key:process.env.CLOUDINARY_KEY,
     api_secret:process.env.CLOUDINARY_SECRET
@@ -24,7 +24,7 @@ class CreatProductController{
             const file :UploadedFile= req.files['file']
 
             const resultFile:UploadApiResponse = await new Promise((resolve, reject)=>{
-                v2.uploader.upload_stream({}, function(error, result){
+                cloudinary.uploader.upload_stream({}, function(error, result){
                     if(error){
                         reject(error)
                         return
