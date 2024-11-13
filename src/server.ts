@@ -10,7 +10,11 @@ import fileUpload from 'express-fileupload';
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    origin: ['http://localhost:8081', 'http://192.168.100.113:8081','https://webpizzaria.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+}))
 app.use(fileUpload({
     limits:{fileSize:50*1024*1024}
 }))
